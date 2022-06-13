@@ -1,7 +1,7 @@
 package net.chunchieh.springbootmall.service.impl;
 
-import net.chunchieh.springbootmall.constant.ProductCategory;
 import net.chunchieh.springbootmall.dao.ProductDao;
+import net.chunchieh.springbootmall.dto.ProductQueryParams;
 import net.chunchieh.springbootmall.dto.ProductRequest;
 import net.chunchieh.springbootmall.model.Product;
 import net.chunchieh.springbootmall.service.ProductService;
@@ -17,8 +17,8 @@ public class ProductServiceImpl implements ProductService {
     private ProductDao productDao;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
-        return productDao.getProducts(category,search);
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
+        return productDao.getProducts(productQueryParams);
     }
 
     @Override

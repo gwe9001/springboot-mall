@@ -1,7 +1,7 @@
 package net.chunchieh.springbootmall.dao.impl;
 
-import net.chunchieh.springbootmall.constant.ProductCategory;
 import net.chunchieh.springbootmall.dao.ProductDao;
+import net.chunchieh.springbootmall.dto.ProductQueryParams;
 import net.chunchieh.springbootmall.dto.ProductRequest;
 import net.chunchieh.springbootmall.model.Product;
 import net.chunchieh.springbootmall.rowmapper.ProductRowMapper;
@@ -24,22 +24,22 @@ public class ProductDaoImpl implements ProductDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Product> getProducts(ProductCategory category, String search) {
+    public List<Product> getProducts(ProductQueryParams productQueryParams) {
         String sql = "SELECT product_id,product_name, category, image_url, price, stock, description, " +
                 "created_date, last_modified_date " +
                 "FROM product WHERE 1=1";
         //WHERE 1=1，主要是為了組合查詢條件(AND ...)
         Map<String,Object> map = new HashMap<>();
 
-        if(category!=null){
+        if(productQueryParams.getCategory()!=null){
             //記得在前面加空白
             sql = sql + " AND category = :category";
-            map.put("category",category.name());
+            map.put("category",productQueryParams.getCategory().name());
         }
 
-        if (search != null){
+        if (productQueryParams.getSearch() != null){
             sql = sql + " AND product_name LIKE :search";
-            map.put("search", "%" + search + "%");
+            map.put("search", "%" + productQueryParams.getSearch() + "%");
         }
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
