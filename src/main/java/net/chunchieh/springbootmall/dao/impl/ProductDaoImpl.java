@@ -64,9 +64,9 @@ public class ProductDaoImpl implements ProductDao {
     public Product getProductById(Integer productId) {
         String sql = "SELECT product_id,product_name, category, image_url, price, stock, description, " +
                 "created_date, last_modified_date " +
-                "FROM product WHERE product_id = :product_id";
+                "FROM product WHERE product_id = :productId";
         Map<String,Object> map = new HashMap<>();
-        map.put("product_id",productId);
+        map.put("productId",productId);
 
         List<Product> productList = namedParameterJdbcTemplate.query(sql, map, new ProductRowMapper());
 
@@ -82,7 +82,7 @@ public class ProductDaoImpl implements ProductDao {
         String sql = "INSERT INTO product (product_name, category, image_url, price, stock, " +
                 "description, created_date, last_modified_date) " +
                 "VALUES (:productName, :category, :imageUrl, :price, :stock, :description, " +
-                ":createdDate, :lastModifiedDate);";
+                ":createdDate, :lastModifiedDate)";
         Map<String,Object> map = new HashMap<>();
         map.put("productName",productRequest.getProductName());
         map.put("category",productRequest.getCategory().toString());
