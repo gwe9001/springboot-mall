@@ -1,5 +1,6 @@
 package net.chunchieh.springbootmall.service;
 
+import net.chunchieh.springbootmall.dto.UserLoginRequest;
 import net.chunchieh.springbootmall.dto.UserRegisterRequest;
 import net.chunchieh.springbootmall.model.User;
 
@@ -8,4 +9,5 @@ public interface UserService {
 
     Integer register(UserRegisterRequest userRegisterRequest);
 
+    User login(UserLoginRequest userLoginRequest);
 }
